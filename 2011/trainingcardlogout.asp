@@ -1,0 +1,4 @@
+<%
+session("CardNo") = ""
+response.redirect "./"
+%>

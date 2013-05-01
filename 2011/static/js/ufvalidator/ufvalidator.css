@@ -1,0 +1,117 @@
+.jquery-info {
+    clear: both;
+    line-height: 1.8;
+    outline: medium none;
+    padding-top: 30px;
+}
+.jquery-plugin h2 {
+    border-bottom: 1px dashed #AAAAAA;
+    color: #6F6F6F;
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+.jquery-plugin h3 {
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    color: #666699;
+    font-size: 11px;
+    font-weight: normal;
+    margin: 10px 0 15px;
+    padding: 10px;
+}
+.form {
+    background-color: #F0F0F0;
+    border-radius: 5px 5px 5px 5px;
+    float: left;
+    line-height: 13px;
+    margin: 0 10px 0 0;
+    padding: 20px;
+    width: 430px;
+}
+.form .form-row {
+    float: left;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.form .label {
+    float: left;
+    font-size: 12px;
+    margin: 6px 0 0 5px;
+    width: 150px;
+}
+.form .input-container {
+    float: left;
+    text-align: right;
+    width: 195px;
+}
+.form .input {
+    border: 2px solid #C4C4C4;
+    height: 18px;
+    width: 180px;
+}
+.form .textarea {
+    border: 2px solid #C4C4C4;
+    font-family: Tahoma;
+    font-size: 11px;
+    height: 120px;
+    width: 180px;
+}
+.form .error-input, .form .error-both .input, .form .error-same .input {
+    background-color: #FFEFEF;
+    border-color: #BB6666;
+    color: #660000;
+}
+.form .error-div {
+    color: red;
+    font-size: 12px;
+    margin: 7px 10px 0 0;
+}
+.form .error-div-alternative {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFEEEE;
+    border-color: #DD3366;
+    border-radius: 10px 10px 10px 10px;
+    border-right: 2px solid #DD3366;
+    border-style: solid;
+    border-width: 0 2px 2px;
+    color: #993344;
+    display: none;
+    font-size: 16px;
+    left: 50%;
+    margin-left: -400px;
+    padding: 20px 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 800px;
+    z-index: 1000;
+}
+.form .error-same, .form .error-both {
+    background-color: #BB6666;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+}
+.sendBtn {
+    background: url("../images/submit-btn-bg.gif") repeat-x scroll 0 0 transparent;
+    border: 1px solid #AAAAAA;
+    border-radius: 3px 3px 3px 3px;
+    color: #5F5F5F;
+    cursor: pointer;
+    display: block;
+    float: right;
+    font-weight: bold;
+    height: 24px;
+    text-align: center;
+}
+.sendBtn:hover {
+    background: url("../images/submit-btn-bg-hover.gif") repeat-x scroll 0 0 transparent;
+    border: 1px solid #5F5F5F;
+    color: #FFFFFF;
+}

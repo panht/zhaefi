@@ -1,0 +1,42 @@
+/************HTML默认标签**************/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, table, th, td {margin:0;padding:0;}
+address, caption, cite, code, dfn, em, th, var {font-style:normal;}
+ul, li {list-style-type:none;}
+img {border:none;}
+input, textarea, select {font-family:inherit;font-weight:inherit;vertical-align:middle;}
+input,select{vertical-align:middle;height:22px;line-height:22px;} 
+body {background: #fff;color: #333;font: 12px '宋体', Arial, Helvetica, sans-serif;}
+a {color: #345292;text-decoration:none;cursor: pointer;}
+a:hover {color: #cc0000;text-decoration:none;}
+td{text-align:left;}
+
+/************通用**************/
+.w980{width:980px;} .w730{width:730px;} .w360{width:360px;} .w220{width:220px;} .w50{width:80px;}
+.w100p{width:100%;}.wmain{width:80%;}
+.h550{height:550px;}
+.fl{float:left;}.fr{float:right;}
+.ml10{margin-left:10px;} .mt10{margin-top:10px;}
+.ma{margin:auto;}
+.bd1{border:solid 1px #ccc;}
+.c{text-align:center;}.l{text-align:left;}.r{text-align:right;}
+.clear,.clear_all{clear:both;}
+.clear_all  {height:0px;line-height:0px;font-size:0px;}
+.clear:after,.clear_all:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.wrapper {width:960px;margin: 0px auto;padding:0px;}
+.c1{color:red;}.c2{color:#EB8F00;}
+.ctitlered{color:#FF0000;}.ctitlecoffee{color:#990000;}.ctitlegreem{color:#0066FF;}
+.fs18{font-size:18px;}.fwn{font-weight:normal;}.fwb{font-weight:bolder;}
+.db{display:block;}.dn{display:none;}
+.ch{cursor:pointer;}
+.tableForm{border:solid 1px #000000; background-color:#a2c8f2; width:95%;text-align:center;}
+.tlist {border-collapse: collapse;width: 100%;}
+.tlist th {padding: 3px 3px 3px 10px;background: url("../images/ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 50% 50% #E6E6E6;border: 1px solid #D3D3D3;color: #555555;font-weight: normal;outline: medium none;}
+.tlist td {padding: 3px 3px 10px 3px;}
+.tlist tr.odd {background-color: #E2E4FF;}
+.tdetail {border-collapse: collapse;width: 98%;}
+.tdetail td {padding: 3px 3px 10px 3px;}
+.highlight{color:blue;font-weight:bolder;}
+
+
+/************菜单**************/
+#accordion li {height:21px;}
