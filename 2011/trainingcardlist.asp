@@ -87,7 +87,7 @@ if not rs.eof then
 				<%if (rs("RecordType") = 1) then
 					response.write "<span style='color:darkgreen'>充值</span>" 
 				elseif (rs("RecordType") = 2) then
-					response.write "<span style='color:red'>消费</span>" 
+					response.write "<span style='color:red'>支付</span>" 
 				end if %>
 			</td>
 			<td style="text-align:right"><%=rs("Amount")%></td>
