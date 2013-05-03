@@ -16,9 +16,8 @@ If request("action")="apply" then
 	rs.open sql, conn, 1, 1
 	if not rs.eof then
 		lectureSubject = rs("subject")
-		PriceMember = rs("PriceMember")
-		PriceMemberPromotion = rs("PriceMemberPromotion")
-		Price = rs("Price")
+		PriceMemberCard = rs("PriceMemberCard")
+		PriceCard = rs("PriceCard")
 	end if
 	rs.close
 		
@@ -33,34 +32,23 @@ If request("action")="apply" then
 		else
 			cardtype = rs("cardtype")
 			balance = rs("balance")
+			TrainingCardID = rs("ID")
 		end if
 		rs.close
 		
-		'卡上余额够不够
-		' 如果是会员卡
+		' 获得讲座费用
 		if cardtype = 1 then
-			' 如果一人报名
-			if applyQuantity = 1 then
-				Amount = PriceMember
-				if balance < PriceMember then
-					response.write "[{'code': -2, 'message':'卡上金额不足，请先充值，或者选用其它方式报名'}]"
-					response.end
-				end if
-			elseif applyQuantity > 1 then
-				'如果多人报名
-				Amount = PriceMemberPromotion * applyQuantity
-				if balance < PriceMemberPromotion * applyQuantity then
-					response.write "[{'code': -2, 'message':'卡上金额不足，请先充值，或者选用其它方式报名'}]"
-					response.end
-				end if
-			end if
+			' 如果是会员卡
+			Amount = PriceMemberCard
 		elseif cardtype = 2 then
 			'如果是非会员卡
-			Amount = Price
-			if balance < Price then
-				response.write "[{'code': -2, 'message':'卡上金额不足，请先充值，或者选用其它方式报名'}]"
-				response.end
-			end if
+			Amount = PriceCard
+		end if
+		
+		'卡上余额够不够
+		if balance - Amount < 0 then
+			response.write "[{'code': -2, 'message':'卡上金额不足，请先充值，或者选用其它方式报名'}]"
+			response.end
 		end if
 	end if
 	
@@ -78,15 +66,6 @@ If request("action")="apply" then
 	
 	' 如果使用学习卡报名
 	if feetype = 3 then
-		' 获取学习卡信息
-		sql = "select * from trainingcard where cardno = '" & cardno & "' and password = '" & cardpassword & "'"
-		rs.open sql, conn, 1, 1
-		if not rs.eof then
-			TrainingCardID = rs("ID")
-			balance = rs("balance")
-		end if
-		rs.close
-		
 		RecordType = 2 '固定为扣款
 		RecordTime = date
 		Remark = applyQuantity & "人报名参加《" & lectureSubject & "》"

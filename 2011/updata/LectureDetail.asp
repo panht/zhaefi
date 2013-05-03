@@ -27,16 +27,17 @@ If request.Form("save") = "保存" Then
 	'Tel=request("Tel")
 	'Fax=request("Fax")
 	PriceMember=request("PriceMember")
-	PriceMemberPromotion=request("PriceMemberPromotion")
+	PriceMemberCard=request("PriceMemberCard")
+	PriceCard=request("PriceCard")
 	Price=request("Price")
 	Remarks=request("Remarks")
 	flagfree=request("flagfree")
 	Content=replace(replace(Content, chr(39), "&#39;"), chr(34), "&quot;")
 
 	if action="new" Then
-		sql="insert into Lecture(subject, content, Remarks, AddDate, flagfree, PriceMember, PriceMemberPromotion, Price) values('" & subject & "', '" & content & "', '" & Remarks & "', #" & AddDate & "#, '" & flagfree & "', " & PriceMember & ", " & PriceMemberPromotion & ", " & Price & ")"
+		sql="insert into Lecture(subject, content, Remarks, AddDate, flagfree, PriceMember, PriceMemberCard, Price, PriceCard) values('" & subject & "', '" & content & "', '" & Remarks & "', #" & AddDate & "#, '" & flagfree & "', " & PriceMember & ", " & PriceMemberCard & ", " & Price & ", " & PriceCard & ")"
 	elseif action="edit" then
-		sql="update Lecture set subject='"&subject&"', content='" & content & "', Remarks='" & Remarks & "', AddDate=#" & AddDate & "#, flagfree='" & flagfree & "', PriceMember=" & PriceMember & ", PriceMemberPromotion=" & PriceMemberPromotion & ", Price=" & Price & " where LectureID=" & id
+		sql="update Lecture set subject='"&subject&"', content='" & content & "', Remarks='" & Remarks & "', AddDate=#" & AddDate & "#, flagfree='" & flagfree & "', PriceMember=" & PriceMember & ", PriceMemberCard=" & PriceMemberCard & ", Price=" & Price & ", PriceCard=" & PriceCard & " where LectureID=" & id
 	end If
 	conn.execute(sql)
 	response.write sql
@@ -49,7 +50,8 @@ End If
 if action="new" then
 	pagetitle="添加讲座"
 	PriceMember=0
-	PriceMemberPromotion=0
+	PriceMemberCard=0
+	PriceCard=0
 	Price=0
 elseif action="edit" then
 	sql="select * from Lecture where Lectureid=" & id
@@ -60,7 +62,8 @@ elseif action="edit" then
 	Remarks=rs("Remarks")
 	FlagFree=rs("FlagFree")
 	PriceMember=rs("PriceMember")
-	PriceMemberPromotion=rs("PriceMemberPromotion")
+	PriceMemberCard=rs("PriceMemberCard")
+	PriceCard=rs("PriceCard")
 	Price=rs("Price")
 	rs.close
 	pagetitle="编辑讲座"
@@ -115,9 +118,10 @@ end if
 				<input type="radio" name="flagfree" value="0" <%If flagfree=False Then response.write " checked"%>>否
 				
 				<div id="divPrice" style="display:block">
-					会员企业一人：￥<input type="input" name="PriceMember" value="<%=PriceMember%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
-					会员企业多人：￥<input type="input" name="PriceMemberPromotion" value="<%=PriceMemberPromotion%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
-					非会员企业&nbsp;&nbsp;：￥<input type="input" name="Price" value="<%=Price%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人
+					非会员价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：￥<input type="input" name="Price" value="<%=Price%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
+					会员价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：￥<input type="input" name="PriceMember" value="<%=PriceMember%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
+					非会员学习卡价：￥<input type="input" name="PriceCard" value="<%=PriceCard%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
+					会员学习卡价&nbsp;&nbsp;：￥<input type="input" name="PriceMemberCard" value="<%=PriceMemberCard%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人
 				</div>
 			</td>
 		</tr>

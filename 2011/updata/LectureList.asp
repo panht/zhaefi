@@ -55,7 +55,7 @@ if not rs.eof Then
 	<tbody>
 		<tr <%If i Mod 2 = 0 Then response.write "class=""odd"""%>>
 			<td><%=rs("Subject")%></td>
-			<td title="会员企业一人价格 | 会员企业多人价格 | 非会员企业价格"><%=rs("PriceMember")%> | <%=rs("PriceMemberPromotion")%> | <%=rs("Price")%></td>
+			<td title="非会员价 | 会员价 | 非会员学习卡价 | 会员学习卡价"><%=rs("Price")%> | <%=rs("PriceMember")%> | <%=rs("PriceCard")%> | <%=rs("PriceMemberCard")%></td>
 			<td><%=formatdatetime(rs("AddDate"),2)%></td>
 			<td class="c"><%=CountApply%></td>
 			<td class="c"><a href="LectureApplyList.asp?id=<%=id%>&name=<%=Server.URLEncode(rs("Subject"))%>">查看</a> | <a href="LectureDownload.asp?id=<%=id%>&Subject=<%=Server.URLEncode(rs("Subject"))%>">下载</a></td>
