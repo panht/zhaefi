@@ -100,6 +100,7 @@ rs.close
 	</div>
 
 	<!--会员中心-->
+	<!--
 	<div class="sidebar mt10">
 		<h3>会员中心</h3>
 		<div class="sidebar_content c c0" style="font-weight:normal">
@@ -135,6 +136,7 @@ function chklogin(){
 		<div class="sidebar_underline">
 		</div>
 	</div>
+	-->
 	
 <!--学习卡登录-->
 	<div class="sidebar mt10">

@@ -85,6 +85,7 @@ End if
 		</div>-->
 		<div class="fr">
 			<div class="web_tip r">
+		<!--
 <%If Len(session("username")) > 0 Then
 	response.write "欢迎，" & session("c_name")
 %>
@@ -94,6 +95,11 @@ Else
 %>
 				<a class="reg" id="loginAnchor" href="./?c=l">会员登录</a>
 <%End if%>
+			-->
+<% If Len(session("CardNo")) > 1 Then
+	response.write "<a href='userzone.asp'>学习卡管理</a>"
+End If%>
+
 				<a class="home" href="javascript:" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.zhaefi.org/');">设为首页</a>
 				<a class="fav" href="javascript:window.external.addFavorite('http://www.zhaefi.org','珠海外商投资企业协会');">加入收藏</a>
 			</div>
