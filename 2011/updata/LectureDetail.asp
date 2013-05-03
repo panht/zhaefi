@@ -113,14 +113,12 @@ end if
 			<td>
 				<input type="radio" name="flagfree" value="1" <%If flagfree=true Then response.write " checked"%>>是&nbsp;
 				<input type="radio" name="flagfree" value="0" <%If flagfree=False Then response.write " checked"%>>否
-			</td>
-		</tr>
-		<tr>
-			<td>价格</td>
-			<td>
-				会员企业一人：￥<input type="input" name="PriceMember" value="<%=PriceMember%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
-				会员企业多人：￥<input type="input" name="PriceMemberPromotion" value="<%=PriceMemberPromotion%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
-				非会员企业&nbsp;&nbsp;：￥<input type="input" name="Price" value="<%=Price%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人
+				
+				<div id="divPrice" style="display:block">
+					会员企业一人：￥<input type="input" name="PriceMember" value="<%=PriceMember%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
+					会员企业多人：￥<input type="input" name="PriceMemberPromotion" value="<%=PriceMemberPromotion%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人<br/><br/>
+					非会员企业&nbsp;&nbsp;：￥<input type="input" name="Price" value="<%=Price%>" class="input req-string req-numeric" style="width:60px;text-align:right;" /> /人
+				</div>
 			</td>
 		</tr>
 		<tr>
@@ -155,11 +153,22 @@ $(document).ready(function(){
 		scope : '#form1',
 		errorDiv : '#errorDiv'
 	});
-
+	
+	// 是否免费单选钮
+	$(":radio").click(function() {
+		if ($(":radio:checked").val() == 0) {
+			$("#divPrice").css("display", "block");
+		} else {
+			$("#divPrice").css("display", "none");
+		}
+	});
+	
+	// 返回按钮
 	$('#btnreturn').click( function(){
 		history.back();
 	});
-
+	
+	// cl编辑器
 	editor = $("#inputCLE").cleditor({
           width:       700, // height not including margins, borders or padding
           height:       250, // height not including margins, borders or padding
