@@ -85,7 +85,13 @@ rs.close%>
 				<input type="radio" value="3" name="FeeType" id="FeeType" style="border:0 0 0 0"/>使用学习卡交报名费&nbsp;
 				<font color=red>*</font> </td></tr>
 				<tr>
-					<td>
+					<td class="news1" align="center">
+						<div id="divFee" style="text-align:center;">会员企业￥<font color=red><%=PriceMember%></font>/人，非会员企业￥<font color=red><%=Price%></font>/人</div>
+						<div id="divFeeCard" style="display:none;text-align:center;">使用学习卡报名，会员企业￥<font color=red><%=PriceMemberCard%></font>/人，非会员企业￥<font color=red><%=PriceCard%></font>/人</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="news1">
 						<div id="divTrainingCard" style="display:none">
 							学习卡号：<input type="input" name="cardno" id="cardno" size="12" />
 							&nbsp;&nbsp;密码：<input type="password" name="cardpassword" id="cardpassword" size="12" />
@@ -197,8 +203,12 @@ $(document).ready(function() {
 	$("input[name='FeeType']").click(function() {
 		if ($(this).val() == 3) {
 			$("#divTrainingCard").css("display", "block");
+			$("#divFee").css("display", "none");
+			$("#divFeeCard").css("display", "block");
 		} else {
 			$("#divTrainingCard").css("display", "none");
+			$("#divFee").css("display", "block");
+			$("#divFeeCard").css("display", "none");
 		}
 	});
 });
