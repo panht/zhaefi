@@ -1,3 +1,5 @@
+<% Session.CodePage=936 
+Response.Charset="GBK" %> 
 <!--#include file="../uc/conn.asp"-->
 <%
 strModuleName="学习卡"
@@ -26,7 +28,29 @@ If request.Form("save") = "保存" Then
 	end if
 	 
 	createby=request("createby")
-
+	
+	' 卡号是否重复
+	if action = "new" then
+		sql = "select * from trainingcard where cardno = '" & cardno & "'"
+	elseif action = "edit" then
+		cardnoOld = request("cardnoOld")
+		sql = "select * from trainingcard where cardno = '" & cardno & "' and cardno <> '" & cardnoOld & "'"
+	end if
+	rs.open sql, conn, 1, 1
+	if not rs.eof then
+		rs.close
+%>
+<script>
+	alert("卡号重复，请重新输入");
+	history.back();
+</script>
+<%
+		response.end
+	else
+		rs.close
+	end if
+	
+	'保存
 	if action="new" Then
 		sql="insert into trainingcard (memberid, companyName, cardtype, cardno, balance, [password], createdate, createby) values("&memberid&", '"&companyName&"', "&cardtype&", '"&cardno&"', 0, '"&password&"', #"&createdate&"#, '"&createby&"')"
 		response.write sql
@@ -94,7 +118,7 @@ end if
 		</tr>
 		<tr>
 			<td>卡号</td>
-			<td><input type="text" name="cardno" size="20" maxlength="20" class="input req-string" value="<%=cardno%>" /></td>
+			<td><input type="text" name="cardno" size="20" maxlength="20" class="input req-string" value="<%=cardno%>" /><input type="hidden" name="cardnoOld" value="<%=cardno%>" /></td>
 			<td>密码</td>
 			<td><input type="text" name="password" size="20" maxlength="20" class="input req-string" value="<%=password%>" /></td>
 		</tr>
