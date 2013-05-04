@@ -33,6 +33,7 @@ name=Request("name")
 			<th><div>电话</div></th>
 			<th><div>传真</div></th>
 			<th><div>手机</div></th> 
+			<th><div>运营商</div></th> 
 			<th><div>Email</div></th>
 			<th><div>交费</div></th>
 			<th><div>时间</div></th>
@@ -61,6 +62,7 @@ if not rs.eof Then
 			<td><%=rs("Tel")%></td>
 			<td><%=rs("Fax")%></td>
 			<td><%=rs("CellPhone")%></td>
+			<td><%=rs("SP")%></td>
 			<td><%=rs("Email")%></td>
 			<td><%=left(rs("FeeType"),3)%></td>
 			<td><%=formatdatetime(rs("PostDate"), 2)%></td>

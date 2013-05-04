@@ -58,6 +58,7 @@ If request("action")="apply" then
 	company=decodeText(request("company"))
 	applyUsername=decodeText(request("applyUsername"))
 	tel=decodeText(request("tel"))
+	SP=decodeText(request("SP"))
 	fax=decodeText(request("fax"))
 	cellphone=decodeText(request("cellphone"))
 	title=decodeText(request("title"))
@@ -88,7 +89,7 @@ If request("action")="apply" then
 	elseif feetype = 3 then
 		feetypetext = "学习卡"
 	end if
-	sql = "insert into LectureSignUp(LectureID, company, username, feetype, title, cellphone, tel, fax, Remarks, email) values(" & LectureID & ", '" & company & "', '" & applyUsername & "', '" & feetypetext & "', '" & title & "', '" & cellphone & "', '" & tel & "', '" & fax & "', '" & Remarks & "', '" & Email & "')"
+	sql = "insert into LectureSignUp(LectureID, company, username, feetype, title, cellphone, tel, SP, fax, Remarks, email) values(" & LectureID & ", '" & company & "', '" & applyUsername & "', '" & feetypetext & "', '" & title & "', '" & cellphone & "', '" & tel & "', '" & SP & "', '" & fax & "', '" & Remarks & "', '" & Email & "')"
 	conn.execute(sql)
 	
 	' 返回报名成功

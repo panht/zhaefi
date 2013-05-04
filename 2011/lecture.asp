@@ -43,6 +43,10 @@ Fax=rs("Fax")
 FlagFree=rs("FlagFree")
 AddDate=rs("AddDate")
 Remarks=rs("Remarks")
+Price=rs("Price")
+PriceMember=rs("PriceMember")
+PriceMemberCard=rs("PriceMemberCard")
+PriceCard=rs("PriceCard")
  if len(AddDate) > 5 then AddDate = "发布日期：" & formatdatetime(cdate(AddDate), 2)
 rs.close%>
 				<tr><td Class="news" align="center">
@@ -56,10 +60,22 @@ rs.close%>
 				<tr><td class="news1"><%=replace(replace(replace(replace(content,chr(13),"<br/>"), "&quot;", chr(34)), "&#39;", chr(39)), "&nbsp;", "")%></td></tr>
 				<tr><td class="news1"><br><br><hr>[<b><%=subject%></b>]网上报名表</td></tr>
 				<tr><td class="news1">【填写要求：】：<%=remarks%></td></tr>
-				<tr><td class="news1">公司名称：<input type="text" name="company" id="company" size="30" maxlength="50"><font color=red>*</font>&nbsp;参加者姓名：<input type="text" name="applyUsername" id="applyUsername" size="30" maxlength="50"><font color=red>*</font></td></tr>
-				<tr><td class="news1">职务：<input type="text" name="title" id="title" size="15" maxlength="50"><font color=red>*</font>&nbsp;联系电话：<input type="text" name="tel" id="tel" size="15" maxlength="50"><font color=red>*</font>&nbsp;传真：<input type="text" name="fax" id="fax" size="15" maxlength="50"><font color=red>*</font>&nbsp;</td></tr>
-				<tr><td class="news1">手机：<input type="text" name="cellphone" id="cellphone" size="15" maxlength="50"><font color=red>*</font>　（协会秘书处将以短信形式通知参会具体事宜）</td></tr>
-				<tr><td class="news1">电子邮箱：<input type="text" name="email" id="email" size="50" maxlength="50"></td></tr>
+				<tr><td class="news1">
+					公司名称：<input type="text" name="company" id="company" size="30" maxlength="50"><font color=red>*</font>&nbsp;
+					参加者姓名：<input type="text" name="applyUsername" id="applyUsername" size="30" maxlength="50"><font color=red>*</font>
+				</td></tr>
+				<tr><td class="news1">
+					职务：<input type="text" name="title" id="title" size="15" maxlength="50"><font color=red>*</font>&nbsp;
+					联系电话：<input type="text" name="tel" id="tel" size="15" maxlength="50"><font color=red>*</font>&nbsp;
+					传真：<input type="text" name="fax" id="fax" size="15" maxlength="50"><font color=red>*</font>&nbsp;
+				</td></tr>
+				<tr><td class="news1">
+					手机：<input type="text" name="cellphone" id="cellphone" size="15" maxlength="50"><font color=red>*</font>
+					手机运营商：<select name="SP" id="SP"><option value="">请选择</option><option value="移动">移动</option><option value="联通">联通</option><option value="电信">电信</option><option value="其他">其他</option></select>（协会秘书处将以短信形式通知参会具体事宜）
+				</td></tr>
+				<tr><td class="news1">
+					电子邮箱：<input type="text" name="email" id="email" size="50" maxlength="50">
+				</td></tr>
 				<tr><td class="news1">备注：<input type="text" name="Remarks" id="Remarks" size="50" maxlength="50"></td></tr>
 <input type="hidden" name="flagfree" id="flagfree" value="<%=flagfree%>">
 <% If FlagFree=false Then%>
@@ -147,6 +163,7 @@ function chk(){
 	tel=encodeURIComponent(encodeURIComponent($("#tel").val()));
 	fax=encodeURIComponent(encodeURIComponent($("#fax").val()));
 	cellphone=encodeURIComponent(encodeURIComponent($("#cellphone").val()));
+	SP=encodeURIComponent(encodeURIComponent($("#SP").val()));
 	title=encodeURIComponent(encodeURIComponent($("#title").val()));
 	email=encodeURIComponent(encodeURIComponent($("#email").val()));
 	Remarks=encodeURIComponent(encodeURIComponent($("#Remarks").val()));
@@ -158,7 +175,7 @@ function chk(){
 	$.ajax({
 		type: "GET",
 		url: "lectureApply.asp?action=apply",
-		data: "flagfree=" + flagfree + "&LectureID=" + LectureID + "&company=" + company + "&applyUsername=" + applyUsername + "&tel=" + tel + "&fax=" + fax + "&cellphone=" + cellphone + "&title=" + title + "&email=" + email + "&Remarks=" + Remarks + "&cardno=" + cardno + "&cardpassword=" + cardpassword + "&applyQuantity=" + applyQuantity + "&feetype=" + feetype,
+		data: "flagfree=" + flagfree + "&LectureID=" + LectureID + "&company=" + company + "&applyUsername=" + applyUsername + "&tel=" + tel + "&fax=" + fax + "&cellphone=" + cellphone + "&SP=" + SP + "&title=" + title + "&email=" + email + "&Remarks=" + Remarks + "&cardno=" + cardno + "&cardpassword=" + cardpassword + "&applyQuantity=" + applyQuantity + "&feetype=" + feetype,
 		success: (function(result) {
 			result = eval(result);
 			if (result[0].code < 0) {
