@@ -150,9 +150,11 @@ $(document).ready(function(){
 	$("#companyname").keyup(function(){
 		var value = $(this).val().trim();
 		if (value.length >= 2) {
+		/*
 			$.ajax({
-				type: "GET",
-				url: "memberop.asp",
+				//type: "GET",
+				//url: "memberop.asp",
+				url: "http://pht-pc:82/general/crm/memberop.php?",
 				data: "action=companyName&name=" + value,
 				success: function(msg) {
 					$("#divCompanyName").html("");
@@ -171,6 +173,24 @@ $(document).ready(function(){
 					}
 				}
 			});
+			*/
+			$.getJSON("http://61.145.230.82:81/general/crm/memberop.php?action=companyName&name=" + value + "&callback=?",
+				function(result) {  
+					$("#divCompanyName").html("");
+					$("#divCompanyName").css("display", "none");
+					//var names = eval(msg);
+					
+					if (result != undefined && result.length > 0) {
+						$("#divCompanyName").append("<ul>");
+						
+						for (var i = 0; i <  result.length; i++) {
+							$("#divCompanyName").append("<li class='liCompanyName' style='padding:5px' id='" + result[i].id + "'>" + result[i].name + "</li>");
+						}
+						$("#divCompanyName").append("</ul>");
+						$("#divCompanyName").css("display", "block");
+					}
+				}
+			);  
 		}
 	});
 	
