@@ -27,7 +27,7 @@ If request.Form("save") = "保存" Then
 		createdate=cdate(createdate)
 	end if
 	 
-	createby=request("createby")
+	'createby=request("createby")
 	
 	' 卡号是否重复
 	if action = "new" then
@@ -52,11 +52,11 @@ If request.Form("save") = "保存" Then
 	
 	'保存
 	if action="new" Then
-		sql="insert into trainingcard (memberid, companyName, cardtype, cardno, balance, [password], createdate, createby) values("&memberid&", '"&companyName&"', "&cardtype&", '"&cardno&"', 0, '"&password&"', #"&createdate&"#, '"&createby&"')"
+		sql="insert into trainingcard (memberid, companyName, cardtype, cardno, balance, [password], createdate, createby) values("&memberid&", '"&companyName&"', "&cardtype&", '"&cardno&"', 0, '"&password&"', #"&createdate&"#, '"&session("AdminUsername")&"')"
 		response.write sql
 		conn.execute(sql)
 	elseif action="edit" then
-		sql="update trainingcard set memberid="&memberid&", companyName='"&companyName&"', cardtype="&cardtype&", cardno='"&cardno&"', [password]='"&password&"', createdate=#"&createdate&"#, createby='"&createby&"' where id="&id
+		sql="update trainingcard set memberid="&memberid&", companyName='"&companyName&"', cardtype="&cardtype&", cardno='"&cardno&"', [password]='"&password&"', createdate=#"&createdate&"#, updateby='"&session("AdminUsername")&"', updatetime=now() where id="&id
 		conn.execute(sql)
 	end If
 	conn.close
@@ -126,7 +126,7 @@ end if
 			<td>开卡日期</td>
 			<td><input type="text" name="createdate" size="15" maxlength="15" class="input req-string" value="<%=createdate%>" /></td>
 			<td>经办人</td>
-			<td><input type="text" name="createby" size="15" maxlength="15" class="input req-string" value="<%=createby%>" /></td>
+			<td><%=createby%></td>
 		</tr>
 		<tr>
 			<td colspan="4" class="c">
