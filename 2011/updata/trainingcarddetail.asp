@@ -52,8 +52,8 @@ If request.Form("save") = "±£´æ" Then
 	
 	'±£´æ
 	if action="new" Then
-		sql="insert into trainingcard (memberid, companyName, cardtype, cardno, balance, [password], createdate, createby) values("&memberid&", '"&companyName&"', "&cardtype&", '"&cardno&"', 0, '"&password&"', #"&createdate&"#, '"&session("AdminUsername")&"')"
-		response.write sql
+		sql="insert into trainingcard (memberid, companyName, cardtype, cardno, balance, [password], createdate, createby, updateby) values("&memberid&", '"&companyName&"', "&cardtype&", '"&cardno&"', 0, '"&password&"', #"&createdate&"#, '"&session("AdminUsername")&"', '"&session("AdminUsername")&"')"
+		'response.write sql
 		conn.execute(sql)
 	elseif action="edit" then
 		sql="update trainingcard set memberid="&memberid&", companyName='"&companyName&"', cardtype="&cardtype&", cardno='"&cardno&"', [password]='"&password&"', createdate=#"&createdate&"#, updateby='"&session("AdminUsername")&"', updatetime=now() where id="&id
