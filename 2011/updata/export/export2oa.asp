@@ -74,7 +74,7 @@ else
 
 	' 更新同步时间
 	sql = "insert into trainingcardsync(operator) values('" & username & "')"
-	'conn.execute(sql)
+	conn.execute(sql)
 	
 	result = result & ");"
 end if
