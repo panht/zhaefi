@@ -23,9 +23,29 @@ else
 	rs.close
 
 	' 同步学习卡
-
+	sql = "select * from trainingcard where updatetime > #" & lastSyncTime & "#"
+	rs.open sql, conn, 1, 1
+	if not rs.eof then
+		result = result & "'dataCard' => array("
+		do while not rs.eof
+			result = result & "array("
+			result = result & "'CompanyName' => '" & rs("CompanyName") & "', "
+			result = result & "'MemberID' => '" & rs("MemberID") & "', "
+			result = result & "'CardNo' => '" & rs("CardNo") & "', "
+			result = result & "'CardType' => '" & rs("CardType") & "', "
+			result = result & "'Balance' => '" & rs("Balance") & "'"
+			result = result & ")"
+			rs.movenext
+			if not rs.eof then
+				result = result & ", "
+			end if
+		loop
+		result = result & "), "
+	end if
+	rs.close
+	
 	' 同步学习卡记录
-	sql = "select * from trainingcardrecord where createtime > #" & lastSyncTime & "#"
+	sql = "select tcr.*, tc.CompanyName, tc.MemberID, tc.CardType from trainingcardrecord tcr, trainingcard tc where tcr.TrainingCardID = tc.id and tcr.createtime > #" & lastSyncTime & "#"
 	rs.open sql, conn, 1, 1
 	if not rs.eof then
 		result = result & "'dataRecord' => array("
@@ -34,11 +54,14 @@ else
 			result = result & "'TrainingCardID' => '" & rs("TrainingCardID") & "', "
 			result = result & "'RecordType' => " & rs("RecordType") & ", "
 			result = result & "'CardNo' => '" & rs("CardNo") & "', "
-			result = result & "'Amount' => " & rs("Amount") & ", "
+			result = result & "'Amount' => '" & rs("Amount") & "', "
 			result = result & "'RecordTime' => '" & rs("RecordTime") & "', "
 			result = result & "'Remark' => '" & rs("Remark") & "', "
 			result = result & "'CreateBy' => '" & rs("CreateBy") & "', "
-			result = result & "'CreateTime' => '" & rs("CreateTime") & "'"
+			result = result & "'CreateTime' => '" & rs("CreateTime") & "',"
+			result = result & "'MemberID' => '" & rs("MemberID") & "',"
+			result = result & "'CompanyName' => '" & rs("CompanyName") & "',"
+			result = result & "'CardType' => '" & rs("CardType") & "'"
 			result = result & ")"
 			rs.movenext
 			if not rs.eof then
@@ -50,7 +73,7 @@ else
 	rs.close
 
 	' 更新同步时间
-	sql = "insert into trainingcardsync(operator) values('')"
+	sql = "insert into trainingcardsync(operator) values('" & username & "')"
 	'conn.execute(sql)
 	
 	result = result & ");"
