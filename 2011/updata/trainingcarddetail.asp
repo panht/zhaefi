@@ -18,7 +18,6 @@ If request.Form("save") = "保存" Then
 	companyName=request("companyName")
 	cardtype=request("cardtype")
 	cardno=request("cardno")
-	password=request("password")
 	createdate=request("createdate")
 	if isnull(createdate) then createdate=""
 	if len(createdate)=0 then
@@ -52,11 +51,12 @@ If request.Form("save") = "保存" Then
 	
 	'保存
 	if action="new" Then
+		password = "555555"
 		sql="insert into trainingcard (memberid, companyName, cardtype, cardno, balance, [password], createdate, createby, updateby) values("&memberid&", '"&companyName&"', "&cardtype&", '"&cardno&"', 0, '"&password&"', #"&createdate&"#, '"&session("AdminUsername")&"', '"&session("AdminUsername")&"')"
 		'response.write sql
 		conn.execute(sql)
 	elseif action="edit" then
-		sql="update trainingcard set memberid="&memberid&", companyName='"&companyName&"', cardtype="&cardtype&", cardno='"&cardno&"', [password]='"&password&"', createdate=#"&createdate&"#, updateby='"&session("AdminUsername")&"', updatetime=now() where id="&id
+		sql="update trainingcard set memberid="&memberid&", companyName='"&companyName&"', cardtype="&cardtype&", cardno='"&cardno&"',  createdate=#"&createdate&"#, updateby='"&session("AdminUsername")&"', updatetime=now() where id="&id
 		conn.execute(sql)
 	end If
 	conn.close
@@ -70,6 +70,8 @@ if action="new" then
 	cardtype=1
 	createdate = formatdatetime(date, 2)
 	createby=session("AdminUsername")
+	' 默认密码
+	password = "555555"
 elseif action="edit" then
 	sql="select * from trainingcard where id=" & id
 	rs.open sql,conn,1,1
@@ -87,6 +89,16 @@ elseif action="del" Then
 	conn.execute(sql)
 	conn.close
 	response.redirect "trainingcardlist.asp?page="&CurrentPage&"&keyword="&keyword
+elseif action="resetPassword" Then
+	sql="update trainingcard set [password] = '555555' where id=" & id
+	conn.execute(sql)
+%>
+	<script language="javascript">
+		alert("密码已重置为555555");
+		window.location.href = "./trainingcardlist.asp?page=<%=CurrentPage%>&keyword=<%=keyword%>";
+	</script>
+<%
+	response.end
 end if
 %>
 <!DOCTYPE html>
@@ -120,7 +132,7 @@ end if
 			<td>卡号</td>
 			<td><input type="text" name="cardno" size="20" maxlength="20" class="input req-string" value="<%=cardno%>" /><input type="hidden" name="cardnoOld" value="<%=cardno%>" /></td>
 			<td>密码</td>
-			<td><input type="text" name="password" size="20" maxlength="20" class="input req-string" value="<%=password%>" /></td>
+			<td>默认密码为555555</td>
 		</tr>
 		<tr>
 			<td>开卡日期</td>

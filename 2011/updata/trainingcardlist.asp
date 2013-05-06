@@ -64,6 +64,7 @@ if not rs.eof then
 				<a href="trainingcarddetail.asp?action=edit&id=<%=id%>&page=<%=page%>&keyword=<%=keyword%>">编辑</a> | 
 				<a href="trainingcardcharge.asp?action=charge&id=<%=id%>&page=<%=page%>&keyword=<%=keyword%>">充值</a> | 
 				<a href="trainingcardhistory.asp?id=<%=id%>&page=<%=page%>&keyword=<%=keyword%>">记录</a> | 
+				<a href="javascript:if (confirm('确定要重置吗?')){window.location.href='trainingcarddetail.asp?action=resetPassword&id=<%=id%>&page=<%=page%>&keyword=<%=keyword%>'}">重置密码</a> | 
 				<a href="javascript:if (confirm('确定要删除吗?')){window.location.href='trainingcarddetail.asp?action=del&id=<%=id%>&page=<%=page%>&keyword=<%=keyword%>'}">删除</a>
 			</td>
 		</tr>
