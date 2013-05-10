@@ -23,7 +23,7 @@ else
 	rs.close
 
 	' 同步学习卡
-	sql = "select * from trainingcard where updatetime > #" & lastSyncTime & "#"
+	sql = "select * from trainingcard where datediff('s', #" & lastSyncTime & "#, updatetime) > 0"
 	rs.open sql, conn, 1, 1
 	if not rs.eof then
 		result = result & "'dataCard' => array("
@@ -45,7 +45,7 @@ else
 	rs.close
 	
 	' 同步学习卡记录
-	sql = "select tcr.*, tc.CompanyName, tc.MemberID, tc.CardType from trainingcardrecord tcr, trainingcard tc where tcr.TrainingCardID = tc.id and tcr.createtime > #" & lastSyncTime & "#"
+	sql = "select tcr.*, tc.CompanyName, tc.MemberID, tc.CardType from trainingcardrecord tcr, trainingcard tc where tcr.TrainingCardID = tc.id and datediff('s', #" & lastSyncTime & "#, tcr.createtime) > 0"
 	rs.open sql, conn, 1, 1
 	if not rs.eof then
 		result = result & "'dataRecord' => array("
