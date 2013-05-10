@@ -39,10 +39,10 @@ If request("action")="apply" then
 		' 获得讲座费用
 		if cardtype = 1 then
 			' 如果是会员卡
-			Amount = PriceMemberCard
+			Amount = PriceMemberCard * applyQuantity
 		elseif cardtype = 2 then
 			'如果是非会员卡
-			Amount = PriceCard
+			Amount = PriceCard * applyQuantity
 		end if
 		
 		'卡上余额够不够
