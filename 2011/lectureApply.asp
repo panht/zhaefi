@@ -77,7 +77,7 @@ If request("action")="apply" then
 		conn.execute(sql)
 		
 		'Ñ§Ï°¿¨¿Û¿î
-		sql = "update trainingcard set balance = balance - " & amount & " where id = " & TrainingCardID
+		sql = "update trainingcard set balance = balance - " & amount & ", updatetime=now() where id = " & TrainingCardID
 		conn.execute(sql)
 	end if
 	
