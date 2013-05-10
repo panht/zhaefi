@@ -49,7 +49,7 @@ rs.close
 			<th width="50px"><div>类别</div></th>
 			<th width="100px"><div>金额</div></th>
 			<th width="120px"><div>时间</div></th>
-			<th><div>备注</div></th>
+			<th><div>说明</div></th>
 		</tr>
 	</thead>
 <%
