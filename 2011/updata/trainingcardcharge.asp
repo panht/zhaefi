@@ -28,7 +28,7 @@ If request.Form("save") = "±£´æ" Then
 	if action="charge" Then
 		sql="insert into trainingcardrecord (TrainingCardID, RecordType, CardNo, Amount, RecordTime, Remark, createby) values("&TrainingCardID&", "&RecordType&", '"&cardno&"', "&Amount&", #"&RecordTime&"#, '"&Remark&"', '"&createby&"')"
 		conn.execute(sql)
-		sql = "update trainingcard set balance = balance + " & amount & " where id = " & TrainingCardID
+		sql = "update trainingcard set balance = balance + " & amount & ", updatetime=now() where id = " & TrainingCardID
 		conn.execute(sql)
 	end If
 	conn.close
