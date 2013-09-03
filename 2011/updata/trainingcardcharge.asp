@@ -72,14 +72,7 @@ end if
 	<table cellspacing="0" cellpadding="0" border="0" class="tdetail mt10 form">
 		<tr>
 			<td>类别</td>
-			<td>
-				<%if cardtype=1 then
-					response.write "会员卡"
-				elseif cardtype=2 then
-					response.write "非会员卡"
-				end if
-				%>
-			</td>
+			<td><%=cardtype%></td>
 			<td>学习卡号</td>
 			<td><%=cardno%></td>
 		</tr>

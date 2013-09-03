@@ -50,13 +50,7 @@ if not rs.eof then
 	<tbody>
 		<tr <%If i Mod 2 = 0 Then response.write "class=""odd"""%>>
 			<td><%=rs("companyName")%></td>
-			<td>
-				<%if (rs("CardType") = 1) then
-					response.write "会员卡" 
-				elseif (rs("CardType") = 2) then
-					response.write "非会员卡"
-				end if %>
-			</td>
+			<td><%=rs("CardType")%></td>
 			<td><%=rs("CardNo")%></td>
 			<td><%=rs("Balance")%></td>
 			<td class="c"><%if not isnull(rs("CreateDate")) Then response.write FormatDateTime(rs("CreateDate"), vbShortDate)%></td>

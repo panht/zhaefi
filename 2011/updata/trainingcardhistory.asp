@@ -30,11 +30,7 @@ if not rs.eof then
 		<td>&nbsp;&nbsp;&nbsp;&nbsp;学习卡类别：</td><td>
 				<%
 				cardtype = rs("cardtype")
-				if cardtype=1 then
-					response.write "会员卡"
-				elseif cardtype=2 then
-					response.write "非会员卡"
-				end if
+				response.write cardtype
 				%></td>
 		<td>&nbsp;&nbsp;&nbsp;&nbsp;余额：</td><td><%=rs("balance")%></td>
 	</tr>

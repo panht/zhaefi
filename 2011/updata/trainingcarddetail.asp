@@ -17,13 +17,25 @@ If request.Form("save") = "保存" Then
 	if isnull(memberid) or memberid="" then memberid=0
 	companyName=request("companyName")
 	cardtype=request("cardtype")
+	cardstatus=request("cardstatus")
 	cardno=request("cardno")
+	OwnerName=request("OwnerName")
+	OwnerCellphone=request("OwnerCellphone")
+	OwnerEmail=request("OwnerEmail")
+	Memo=request("Memo")
 	createdate=request("createdate")
 	if isnull(createdate) then createdate=""
 	if len(createdate)=0 then
 		createdate=cdate("1900-1-1")
 	else
 		createdate=cdate(createdate)
+	end if
+	CancelDate=request("CancelDate")
+	if isnull(CancelDate) then CancelDate=""
+	if len(CancelDate)=0 then
+		CancelDate=cdate("1900-1-1")
+	else
+		CancelDate=cdate(CancelDate)
 	end if
 	 
 	'createby=request("createby")
@@ -52,11 +64,12 @@ If request.Form("save") = "保存" Then
 	'保存
 	if action="new" Then
 		password = "555555"
-		sql="insert into trainingcard (memberid, companyName, cardtype, cardno, balance, [password], createdate, createby, updateby) values("&memberid&", '"&companyName&"', "&cardtype&", '"&cardno&"', 0, '"&password&"', #"&createdate&"#, '"&session("AdminUsername")&"', '"&session("AdminUsername")&"')"
-		'response.write sql
+		sql="insert into trainingcard (memberid, companyName, cardtype, cardstatus, cardno, OwnerName, OwnerCellphone, OwnerEmail, [Memo], balance, [password], createdate, CancelDate, createby, updateby) values("&memberid&", '"&companyName&"', '"&cardtype&"', '"&cardstatus&"', '"&cardno&"', '"&OwnerName&"', '"&OwnerCellphone&"', '"&OwnerEmail&"', '"&Memo&"', 0, '"&password&"', #"&createdate&"#, #"&CancelDate&"#, '"&session("AdminUsername")&"', '"&session("AdminUsername")&"')"
+		response.write sql
 		conn.execute(sql)
 	elseif action="edit" then
-		sql="update trainingcard set memberid="&memberid&", companyName='"&companyName&"', cardtype="&cardtype&", cardno='"&cardno&"',  createdate=#"&createdate&"#, updateby='"&session("AdminUsername")&"', updatetime=now() where id="&id
+		sql="update trainingcard set memberid="&memberid&", companyName='"&companyName&"', cardtype='"&cardtype&"', cardstatus='"&cardstatus&"', cardno='"&cardno&"', OwnerName='"&OwnerName&"', OwnerCellphone='"&OwnerCellphone&"', OwnerEmail='"&OwnerEmail&"', [Memo]='"&Memo&"',  createdate=#"&createdate&"#,  CancelDate=#"&CancelDate&"#, updateby='"&session("AdminUsername")&"', updatetime=now() where id="&id
+		response.write sql
 		conn.execute(sql)
 	end If
 	conn.close
@@ -68,8 +81,13 @@ End If
 if action="new" then
 	pagetitle="开卡"
 	cardtype=1
+	cardstatus=1
+	balance=0
 	createdate = formatdatetime(date, 2)
+	createtime = formatdatetime(date, 2)
 	createby=session("AdminUsername")
+	updatetime = createtime
+	updateby = createby
 	' 默认密码
 	password = "555555"
 elseif action="edit" then
@@ -78,10 +96,22 @@ elseif action="edit" then
 	memberid=rs("memberid")
 	companyName=rs("companyName")
 	cardtype=rs("cardtype")
+	cardstatus=rs("cardstatus")
 	cardno=rs("cardno")
+	OwnerName=rs("OwnerName")
+	OwnerCellphone=rs("OwnerCellphone")
+	OwnerEmail=rs("OwnerEmail")
 	password=rs("password")
+	balance=rs("balance")
+	Memo=rs("Memo")
 	createdate=formatdatetime(rs("createdate"), 2)
+	if len(rs("CancelDate")) > 0 then
+		CancelDate=formatdatetime(rs("CancelDate"), 2)
+	end if
+	CreateTime=formatdatetime(rs("CreateTime"), 2)
 	createby=rs("createby")
+	updatetime=formatdatetime(rs("updatetime"), 2)
+	updateby=rs("updateby")
 	rs.close
 	pagetitle="编辑学习卡"
 elseif action="del" Then
@@ -120,8 +150,10 @@ end if
 	<div class="c c2 fs18"><%=strModuleName%></div>
 	<table cellspacing="0" cellpadding="0" border="0" class="tdetail mt10 form">
 		<tr>
-			<td>类别</td>
-			<td colspan="3"><input type="radio" name="cardtype" value="1" <%if cardtype=1 then response.write "checked"%>/>会员卡&nbsp;&nbsp;<input type="radio" name="cardtype" value="2" <%if cardtype=2 then response.write "checked"%>/>非会员卡</td>
+			<td>卡号</td>
+			<td><input type="text" name="cardno" size="20" maxlength="20" class="input req-string" value="<%=cardno%>" /><input type="hidden" name="cardnoOld" value="<%=cardno%>" /></td>
+			<td>密码</td>
+			<td>默认密码为555555</td>
 		</tr>
 		<tr>
 			<td>企业名称</td>
@@ -129,16 +161,44 @@ end if
 			<div id="divCompanyName"  style="border:solid 1px; display:none; width: 300px;"></td>
 		</tr>
 		<tr>
-			<td>卡号</td>
-			<td><input type="text" name="cardno" size="20" maxlength="20" class="input req-string" value="<%=cardno%>" /><input type="hidden" name="cardnoOld" value="<%=cardno%>" /></td>
-			<td>密码</td>
-			<td>默认密码为555555</td>
+			<td>持卡人姓名</td>
+			<td><input type="text" name="OwnerName" size="20" maxlength="20" value="<%=OwnerName%>" /></td>
+			<td>持卡人手机号码</td>
+			<td><input type="text" name="OwnerCellphone" size="20" maxlength="12" value="<%=OwnerCellphone%>" /></td>
+		</tr>
+		<tr>
+			<td>持卡人电邮</td>
+			<td><input type="text" name="OwnerEmail" size="50" maxlength="50" value="<%=OwnerEmail%>" /></td>
+			<td>余额</td>
+			<td><input type="text" name="Balance" size="20" maxlength="20" class="input req-string" value="<%=Balance%>" disabled /></td>
 		</tr>
 		<tr>
 			<td>开卡日期</td>
-			<td><input type="text" name="createdate" size="15" maxlength="15" class="input req-string" value="<%=createdate%>" /></td>
-			<td>经办人</td>
+			<td><input type="text" name="createdate" size="15" maxlength="15" class="input req-string" value="<%=createdate%>" /> yyyy-mm-dd</td>
+			<td>类型</td>
+			<td><input type="radio" name="cardtype" value="会员卡" <%if cardtype="会员卡" then response.write "checked"%>/>会员卡&nbsp;&nbsp;<input type="radio" name="cardtype" value="非会员卡" <%if cardtype="非会员卡" then response.write "checked"%>/>非会员卡</td>
+		</tr>
+		<tr>
+			<td>状态</td>
+			<td><input type="radio" name="cardStatus" value="已激活" <%if cardStatus="已激活" then response.write "checked"%>/>已激活&nbsp;&nbsp;<input type="radio" name="cardStatus" value="已注销" <%if cardStatus="已注销" then response.write "checked"%>/>已注销&nbsp;&nbsp;<input type="radio" name="cardStatus" value="冻结中" <%if cardStatus="冻结中" then response.write "checked"%>/>冻结中</td>
+			<td>注销日期</td>
+			<td><input type="text" name="Canceldate" size="15" maxlength="15"  value="<%=Canceldate%>" /> yyyy-mm-dd</td>
+		</tr>
+		<tr>
+			<td>备注</td>
+			<td colspan="3"><input type="text" name="Memo" size="50" maxlength="200" value="<%=Memo%>" /></td>
+		</tr>
+		<tr>
+			<td>创建人</td>
 			<td><%=createby%></td>
+			<td>创建时间</td>
+			<td><%=createtime%></td>
+		</tr>
+		<tr>
+			<td>最后修改人</td>
+			<td><%=updateBy%></td>
+			<td>最后修改时间</td>
+			<td><%=updatetime%></td>
 		</tr>
 		<tr>
 			<td colspan="4" class="c">

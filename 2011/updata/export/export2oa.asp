@@ -33,7 +33,18 @@ else
 			result = result & "'MemberID' => '" & rs("MemberID") & "', "
 			result = result & "'CardNo' => '" & rs("CardNo") & "', "
 			result = result & "'CardType' => '" & rs("CardType") & "', "
-			result = result & "'Balance' => '" & rs("Balance") & "'"
+			result = result & "'CardStatus' => '" & rs("CardStatus") & "', "
+			result = result & "'OwnerName' => '" & rs("OwnerName") & "', "
+			result = result & "'OwnerCellphone' => '" & rs("OwnerCellphone") & "', "
+			result = result & "'OwnerEmail' => '" & rs("OwnerEmail") & "', "
+			result = result & "'Memo' => '" & rs("Memo") & "', "
+			result = result & "'CreateDate' => '" & rs("CreateDate") & "', "
+			result = result & "'CancelDate' => '" & rs("CancelDate") & "', "
+			result = result & "'Balance' => '" & rs("Balance") & "', "
+			result = result & "'CreateTime' => '" & rs("CreateTime") & "', "
+			result = result & "'CreateBy' => '" & rs("CreateBy") & "', "
+			result = result & "'UpdateTime' => '" & rs("UpdateTime") & "', "
+			result = result & "'UpdateBy' => '" & rs("UpdateBy") & "'"
 			result = result & ")"
 			rs.movenext
 			if not rs.eof then
@@ -52,7 +63,12 @@ else
 		do while not rs.eof
 			result = result & "array("
 			result = result & "'TrainingCardID' => '" & rs("TrainingCardID") & "', "
-			result = result & "'RecordType' => " & rs("RecordType") & ", "
+			if (rs("RecordType") = 1) then
+				RecordType = "³äÖµ" 
+			elseif (rs("RecordType") = 2) then
+				RecordType = "Ö§¸¶"
+			end if 
+			result = result & "'RecordType' => '" & RecordType & "', "
 			result = result & "'CardNo' => '" & rs("CardNo") & "', "
 			result = result & "'Amount' => '" & rs("Amount") & "', "
 			result = result & "'RecordTime' => '" & rs("RecordTime") & "', "
