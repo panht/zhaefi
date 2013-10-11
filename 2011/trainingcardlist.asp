@@ -44,12 +44,7 @@ trainingcardid =  rs("id")
 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>学习卡号</strong>：</td><td><%=rs("cardno")%></td>
 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>学习卡类别</strong>：</td><td>
 				<%
-				cardtype = rs("cardtype")
-				if cardtype=1 then
-					response.write "会员卡"
-				elseif cardtype=2 then
-					response.write "非会员卡"
-				end if
+				response.write rs("cardtype")
 				%></td>
 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>余额</strong>：</td><td><span style="color:red"><%=rs("balance")%></span></td>
 	</tr>
