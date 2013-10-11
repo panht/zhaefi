@@ -45,7 +45,7 @@ rs.close
 			<li class="menu dn"><a href="http://tongji.baidu.com" target="_blank">访问统计</a></li>
 			<li class="menu dn"><a href="adminmodule.asp">栏目管理</a></li>
 			<li class="menu dn"><a href="adminuserlist.asp">帐号管理</a></li>
-			<li class="menu dn"><a href="datasyn.asp">数据同步</a></li>
+			<!--<li class="menu dn"><a href="datasyn.asp">数据同步</a></li>-->
 			<li class="menu dn"><a href="adminpassworddetail.asp">修改密码</a></li>
 		</ul>
 	</div>
