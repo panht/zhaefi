@@ -32,7 +32,7 @@ rs.close
 	<h3 class="menu dn"><a href="#">业务管理</a></h3>
 	<div>
 		<ul>
-			<li class="menu dn"><a href="memberlist.asp">会员管理</a></li>
+			<!--<li class="menu dn"><a href="memberlist.asp">会员管理</a></li>-->
 			<li class="menu dn"><a href="trainingcardlist.asp">学习卡</a></li>
 			<li class="menu dn"><a href="lecturelist.asp">讲座管理</a></li>
 			<li class="menu dn"><a href="inquirylist.asp">热点调查</a></li>
