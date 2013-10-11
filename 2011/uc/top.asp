@@ -106,7 +106,7 @@ End If%>
 			<div class="search r mt10">
 				<select name="keywordquery">
 					<option selected="" value="channel.asp?c=83&keyword=">政策法规</option>
-					<option value="member.asp?keyword=">会员企业</option>
+					<% '<option value="member.asp?keyword=">会员企业</option> %>
 					<option value="channel.asp?c=93&keyword=">资讯焦点</option>
 				</select>
 				<input name="keywords" value="" class="search_input" style="color:black">
