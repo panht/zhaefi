@@ -37,10 +37,10 @@ If request("action")="apply" then
 		rs.close
 		
 		' 获得讲座费用
-		if cardtype = 1 then
+		if cardtype = "会员卡" then
 			' 如果是会员卡
 			Amount = PriceMemberCard * applyQuantity
-		elseif cardtype = 2 then
+		elseif cardtype = "非会员卡" then
 			'如果是非会员卡
 			Amount = PriceCard * applyQuantity
 		end if
