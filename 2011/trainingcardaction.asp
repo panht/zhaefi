@@ -16,6 +16,7 @@ if action="login" Then
 	else
 		response.write "[{'code': 1, 'message':'µÇÂ¼³É¹¦'}]"
 		session("cardno") = rs("cardno")
+		session("CompanyName") = rs("CompanyName")
 		Session.Timeout= 30
 	end if
 	rs.close
