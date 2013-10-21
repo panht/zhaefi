@@ -61,7 +61,7 @@ rs.close%>
 				<tr><td class="news1"><br><br><hr>[<b><%=subject%></b>]网上报名表</td></tr>
 				<tr><td class="news1">【填写要求：】：<%=remarks%></td></tr>
 				<tr><td class="news1">
-					公司名称：<input type="text" name="company" id="company" size="30" maxlength="50"><font color=red>*</font>&nbsp;
+					公司名称：<input type="text" name="company" value="<%=session("CompanyName")%>" id="company" size="30" maxlength="50"><font color=red>*</font>&nbsp;
 					参加者姓名：<input type="text" name="applyUsername" id="applyUsername" size="30" maxlength="50"><font color=red>*</font>
 				</td></tr>
 				<tr><td class="news1">
@@ -93,7 +93,7 @@ rs.close%>
 				<tr>
 					<td class="news1">
 						<div id="divTrainingCard" style="display:none">
-							学习卡号：<input type="input" name="cardno" id="cardno" size="12" />
+							学习卡号：<input type="input" value="<%=session("cardno")%>" name="cardno" id="cardno" size="12" />
 							&nbsp;&nbsp;密码：<input type="password" name="cardpassword" id="cardpassword" size="12" />
 							&nbsp;&nbsp;报名人数：<input type="input" name="applyQuantity" id="applyQuantity" size="3" />人
 						</div>
