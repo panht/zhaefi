@@ -1,3 +1,4 @@
+<!--#include virtual="uc/360_safe3.asp"-->
 <%
 '格式化标题，长度超出指定长度以...补足
 Function FormatArtTitle(title, length)
