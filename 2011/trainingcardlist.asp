@@ -36,7 +36,7 @@ trainingcardid =  rs("id")
 <table cellspacing="5px" cellpadding="0" border="0" width="100%">
 	<tr><td colspan="8" >
         <div class="article_content" style="border:0;padding:5px;">
-			<h1>学习卡管理</h1>
+			<h1>帐户查询</h1>
 		</div>
 	</td></tr>
 	<tr>
