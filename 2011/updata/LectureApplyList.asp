@@ -64,7 +64,7 @@ if not rs.eof Then
 			<td><%=rs("CellPhone")%></td>
 			<td><%=rs("SP")%></td>
 			<td><%=rs("Email")%></td>
-			<td><%=left(rs("FeeType"),3)%></td>
+			<td><%=rs("FeeType")%></td>
 			<td><%=formatdatetime(rs("PostDate"), 2)%></td>
 			<td><%=rs("Remarks")%></td>
 		</tr>

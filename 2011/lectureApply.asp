@@ -87,7 +87,7 @@ If request("action")="apply" then
 	elseif feetype = 2 then
 		feetypetext = "提前"
 	elseif feetype = 3 then
-		feetypetext = "学习卡"
+		feetypetext = "学习卡 " & cardno
 	end if
 	sql = "insert into LectureSignUp(LectureID, company, username, feetype, title, cellphone, tel, SP, fax, Remarks, email) values(" & LectureID & ", '" & company & "', '" & applyUsername & "', '" & feetypetext & "', '" & title & "', '" & cellphone & "', '" & tel & "', '" & SP & "', '" & fax & "', '" & Remarks & "', '" & Email & "')"
 	conn.execute(sql)
