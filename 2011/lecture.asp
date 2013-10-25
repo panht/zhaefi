@@ -61,7 +61,7 @@ rs.close%>
 				<tr><td class="news1"><br><br><hr>[<b><%=subject%></b>]网上报名表</td></tr>
 				<tr><td class="news1">【填写要求：】：<%=remarks%></td></tr>
 				<tr><td class="news1">
-					公司名称：<input type="text" name="company" value="<%=session("CompanyName")%>" id="company" size="30" maxlength="50"><font color=red>*</font>&nbsp;
+					公司名称：<input type="text" name="company" value="<%=session("CompanyName")%>" id="company" size="30" maxlength="50" <%if session("CompanyName") <> "" then response.write "readonly"%>><font color=red>*</font>&nbsp;
 					参加者姓名：<input type="text" name="applyUsername" id="applyUsername" size="30" maxlength="50"><font color=red>*</font>
 				</td></tr>
 				<tr><td class="news1">
