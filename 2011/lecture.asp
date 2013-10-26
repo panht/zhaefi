@@ -59,7 +59,19 @@ rs.close%>
 				<tr><td height="2" bgcolor="#02519c"></td></tr>
 				<tr><td class="news1"><%=replace(replace(replace(replace(content,chr(13),"<br/>"), "&quot;", chr(34)), "&#39;", chr(39)), "&nbsp;", "")%></td></tr>
 				<tr><td class="news1"><br><br><hr>[<b><%=subject%></b>]网上报名表</td></tr>
-				<tr><td class="news1">【填写要求：】：<%=remarks%></td></tr>
+				<tr><td class="news1">【填写要求：】：<%=remarks%>
+<div class="mt10 sidebar" id="applyFormTrainingCardLogin" style="position: absolute; z-index: 99; background-color: white; float: none; left: 500px; display:none;">
+	<h3>学习卡登录</h3>
+	<div class="sidebar_content c c0" style="font-weight:normal;background-color:white;">
+		学习卡号&nbsp;&nbsp;&nbsp;&nbsp;：<input name="applyFormlogincardno" id="applyFormLoginCardNo" size="12" maxlength="20"><br>
+		学习卡密码：<input name="logincardpassword" id="applyFormLoginCardPassword" type="password" size="12" maxlength="20">
+		<input name="logincard" id="applyFormLoginCard" type="button" value="登录" class="search_button ch">
+
+	</div>
+	<div class="sidebar_underline">
+	</div>
+</div>				
+				</td></tr>
 				<tr><td class="news1">
 					公司名称：<input type="text" name="company" value="<%=session("CompanyName")%>" id="company" size="30" maxlength="50" <%if session("CompanyName") <> "" then response.write "readonly"%>><font color=red>*</font>&nbsp;
 					参加者姓名：<input type="text" name="applyUsername" id="applyUsername" size="30" maxlength="50"><font color=red>*</font>
@@ -79,10 +91,10 @@ rs.close%>
 				<tr><td class="news1">备注：<input type="text" name="Remarks" id="Remarks" size="50" maxlength="50"></td></tr>
 <input type="hidden" name="flagfree" id="flagfree" value="<%=flagfree%>">
 <% If FlagFree=false Then%>
-				<tr><td class="news1">贵公司准备（请选择）： 
+				<tr><td class="news1" id="chooseFeeType">贵公司准备（请选择）： 
 				<input type="radio" value="1" name="FeeType" id="FeeType" style="border:0 0 0 0"/>现场交报名费&nbsp;
 				<input type="radio" value="2" name="FeeType" id="FeeType" style="border:0 0 0 0" checked />提前交报名费&nbsp;
-				<input type="radio" value="3" name="FeeType" id="FeeType" style="border:0 0 0 0"/>使用学习卡交报名费&nbsp;
+				<input type="radio" value="3" name="FeeType" id="FeeType" class="feetype3" style="border:0 0 0 0"/>使用学习卡交报名费&nbsp;
 				<font color=red>*</font> </td></tr>
 				<tr>
 					<td class="news1" align="center">
@@ -93,8 +105,8 @@ rs.close%>
 				<tr>
 					<td class="news1">
 						<div id="divTrainingCard" style="display:none">
-							学习卡号：<input type="input" value="<%=session("cardno")%>" name="cardno" id="cardno" size="12" />
-							&nbsp;&nbsp;密码：<input type="password" name="cardpassword" id="cardpassword" size="12" />
+							<!--学习卡号：<input type="input" value="" name="cardno" id="cardno" size="12" />
+							&nbsp;&nbsp;密码：<input type="password" name="cardpassword" id="cardpassword" size="12" />-->
 							&nbsp;&nbsp;报名人数：<input type="input" name="applyQuantity" id="applyQuantity" size="3" />人
 						</div>
 					</td>
@@ -138,6 +150,7 @@ function chk(){
 	}
 	//  如果选中使用学习卡报名
 	if ($("#FeeType:checked").val() == "3") {
+		/*
 		if($("#cardno").val() == ""){
 			alert("请填写学习卡号！");
 			$("#cardno")[0].focus();
@@ -148,6 +161,7 @@ function chk(){
 			$("#cardpassword")[0].focus();
 			return false;
 		}
+		*/
 		if($("#applyQuantity").val() == ""){
 			alert("请填写报名人数！");
 			$("#applyQuantity")[0].focus();
@@ -188,7 +202,19 @@ function chk(){
 				alert(result[0].message);
 			} else {
 				alert(result[0].message);
-				$("#form1")[0].reset();
+				
+				if ($("#company").attr("readonly") == undefined) {
+					$("#company").val("");
+				} 
+				$("#applyUsername").val("");
+				$("#tel").val("");
+				$("#fax").val("");
+				$("#cellphone").val("");
+				$("#SP").val("");
+				$("#title").val("");
+				$("#email").val("");
+				$("#Remarks").val("");
+				$("#applyQuantity").val("");
 			}
 		}),
 	});
@@ -205,11 +231,59 @@ $(document).ready(function() {
 			$("#divTrainingCard").css("display", "block");
 			$("#divFee").css("display", "none");
 			$("#divFeeCard").css("display", "block");
+			
+			// 如果公司名称非只读，说明未登录，显示登录框 
+			if ($("#company").attr("readonly") == undefined) {
+				$("#applyFormTrainingCardLogin").css("display", "block");
+				$("#applyFormTrainingCardLogin #applyFormLoginCardNo").focus();
+			}
 		} else {
 			$("#divTrainingCard").css("display", "none");
 			$("#divFee").css("display", "block");
 			$("#divFeeCard").css("display", "none");
+			
+			// 隐藏登录框 
+			$("#applyFormTrainingCardLogin").css("display", "none");
 		}
+	});
+	
+	$("#applyFormLoginCard").click(function() {
+		logincardno = encodeURIComponent(encodeURIComponent($("#applyFormLoginCardNo").val()));
+		logincardpassword = encodeURIComponent(encodeURIComponent($("#applyFormLoginCardPassword").val()));
+		
+		if( logincardno== ""){
+			alert("请输入学习卡号！");
+			$("#applyFormLoginCardNo")[0].focus();
+			return false;
+		}
+		if(logincardpassword == ""){
+			alert("请输入学习卡密码！");
+			$("#applyFormLoginCardPassword")[0].focus();
+			return false;
+		}
+		
+		$.ajax({
+			type: "GET",
+			url: "trainingcardaction.asp",
+			data: "action=login&logincardno=" + logincardno + "&logincardpassword=" + logincardpassword,
+			success: (function(result) {
+				result = eval(result);
+				if (result[0].code < 0) {
+					alert(result[0].message);
+				} else {
+					// 关闭讲座报名表中弹出的登录框
+					$("#applyFormTrainingCardLogin").css("display", "none");
+					// 设置讲座报名表中的公司名称，并将文本框置为只读
+					$("#company").val(result[0].CompanyName);
+					$("#company").attr("readonly", "true");
+					
+					// 处理右边栏的登录框
+					$("#divCardLogin").html("<a href='userzone.asp'>学习卡管理</a>");
+					
+					alert(result[0].message);
+				}
+			}),
+		});
 	});
 });
 </script>

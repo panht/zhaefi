@@ -139,17 +139,22 @@ function chklogin(){
 	-->
 	
 <!--学习卡登录-->
-	<div class="sidebar mt10">
+	<div class="sidebar mt10" id="trainingcardlogin">
 		<h3>学习卡登录</h3>
 		<div class="sidebar_content c c0" style="font-weight:normal" id="divCardLogin">
 <% If Len(session("CardNo")) > 1 Then
 	response.write "<a href='userzone.asp'>学习卡管理</a>"
-%>
-
-<%Else%>
+Else%>
 			学习卡号&nbsp;&nbsp;&nbsp;&nbsp;：<input name="logincardno" id="logincardno" size="12" maxlength="20"/><br/>
 			学习卡密码：<input name="logincardpassword" id="logincardpassword" type="password" size="12" maxlength="20" />
 			<input name="logincard" id="logincard" type="button" value="登录" class="search_button ch"/>
+<%End If%>
+		</div>
+		<div class="sidebar_underline">
+		</div>
+	</div>
+<% If Len(session("CardNo")) > 1 Then
+Else%>
 <script>
 $(document).ready(function() {
 	$("#logincard").click(function() {
@@ -177,6 +182,8 @@ $(document).ready(function() {
 					alert(result[0].message);
 				} else {
 					alert(result[0].message);
+					
+					// 处理右边栏的登录框
 					$("#divCardLogin").html("<a href='userzone.asp'>学习卡管理</a>");
 				}
 			}),
@@ -185,10 +192,6 @@ $(document).ready(function() {
 });
 </script>
 <%End If%>
-		</div>
-		<div class="sidebar_underline">
-		</div>
-	</div>
  <%'首页才显示微博
  If InStr(URLCurrent, "default.asp") > 0 Then%>
 	<div class="sidebar mt10">

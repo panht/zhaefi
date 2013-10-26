@@ -14,7 +14,7 @@ if action="login" Then
 		response.write "[{'code': -1, 'message':'卡号或密码错误，请重新输入'}]"
 		response.end
 	else
-		response.write "[{'code': 1, 'message':'登录成功'}]"
+		response.write "[{'code': 1, 'message':'登录成功', 'CompanyName':'" & rs("CompanyName") & "'}]"
 		session("cardno") = rs("cardno")
 		session("CompanyName") = rs("CompanyName")
 		Session.Timeout= 30

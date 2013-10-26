@@ -24,12 +24,14 @@ If request("action")="apply" then
 	'如果使用学习卡报名
 	if feetype = 3 then
 		'卡号密码是否正确
-		sql = "select * from trainingcard where cardno = '" & cardno & "' and password = '" & cardpassword & "'"
+		'sql = "select * from trainingcard where cardno = '" & cardno & "' and password = '" & cardpassword & "'"
+		sql = "select * from trainingcard where cardno = '" & session("cardno") & "'"
 		rs.open sql, conn, 1, 1
-		if rs.eof then
-			response.write "[{'code': -1, 'message':'卡号或密码错误，请重新输入'}]"
-			response.end
-		else
+		'if rs.eof then
+		'	response.write "[{'code': -1, 'message':'卡号或密码错误，请重新输入'}]"
+		'	response.end
+		'else
+		if not rs.eof then
 			cardtype = rs("cardtype")
 			balance = rs("balance")
 			TrainingCardID = rs("ID")
