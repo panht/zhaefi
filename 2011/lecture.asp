@@ -60,15 +60,12 @@ rs.close%>
 				<tr><td class="news1"><%=replace(replace(replace(replace(content,chr(13),"<br/>"), "&quot;", chr(34)), "&#39;", chr(39)), "&nbsp;", "")%></td></tr>
 				<tr><td class="news1"><br><br><hr>[<b><%=subject%></b>]网上报名表</td></tr>
 				<tr><td class="news1">【填写要求：】：<%=remarks%>
-<div class="mt10 sidebar" id="applyFormTrainingCardLogin" style="position: absolute; z-index: 99; background-color: white; float: none; left: 500px; display:none;">
+<div class="mt10 sidebar" id="applyFormTrainingCardLogin" style="position: absolute; z-index: 99; background-color: white; float: none; left: 500px; border: solid 1px; display:none;">
 	<h3>学习卡登录</h3>
-	<div class="sidebar_content c c0" style="font-weight:normal;background-color:white;">
+	<div class="sidebar_content c c0" style="font-weight:normal;background-color: #eee;padding:5px;">
 		学习卡号&nbsp;&nbsp;&nbsp;&nbsp;：<input name="applyFormlogincardno" id="applyFormLoginCardNo" size="12" maxlength="20"><br>
 		学习卡密码：<input name="logincardpassword" id="applyFormLoginCardPassword" type="password" size="12" maxlength="20">
 		<input name="logincard" id="applyFormLoginCard" type="button" value="登录" class="search_button ch">
-
-	</div>
-	<div class="sidebar_underline">
 	</div>
 </div>				
 				</td></tr>
