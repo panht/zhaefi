@@ -279,7 +279,7 @@ $(document).ready(function() {
 					$("#company").attr("readonly", "true");
 					
 					// 处理右边栏的登录框
-					$("#divCardLogin").html("<a href='userzone.asp'>学习卡管理</a>");
+					$("#divCardLogin").html('<li class="fs_14" style="background:none;"><IMG SRC="../static/images/right.png" ><a href="trainingcardlist.asp">账户查询</a></li><li class="fs_14" style="background:none;"><IMG SRC="../static/images/right.png" ><a href="trainingcardpassword.asp">修改密码</a></li><li class="fs_14" style="background:none;"><IMG SRC="../static/images/right.png" ><a href="trainingcardlogout.asp">注销登录</a></li>');
 					
 					alert(result[0].message);
 				}

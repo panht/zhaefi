@@ -139,20 +139,22 @@ function chklogin(){
 	-->
 	
 <!--学习卡登录-->
+<% If Len(session("CardNo")) > 1 Then%>
+	<!--#include file="../userzonemenu.asp"-->
+<% Else%>
 	<div class="sidebar mt10" id="trainingcardlogin">
 		<h3>学习卡登录</h3>
 		<div class="sidebar_content c c0" style="font-weight:normal" id="divCardLogin">
-<% If Len(session("CardNo")) > 1 Then
-	response.write "<a href='userzone.asp'>学习卡管理</a>"
-Else%>
+
 			学习卡号&nbsp;&nbsp;&nbsp;&nbsp;：<input name="logincardno" id="logincardno" size="12" maxlength="20"/><br/>
 			学习卡密码：<input name="logincardpassword" id="logincardpassword" type="password" size="12" maxlength="20" />
 			<input name="logincard" id="logincard" type="button" value="登录" class="search_button ch"/>
-<%End If%>
+
 		</div>
 		<div class="sidebar_underline">
 		</div>
 	</div>
+<%End If%>
 <% If Len(session("CardNo")) > 1 Then
 Else%>
 <script>
@@ -184,7 +186,7 @@ $(document).ready(function() {
 					alert(result[0].message);
 					
 					// 处理右边栏的登录框
-					$("#divCardLogin").html("<a href='userzone.asp'>学习卡管理</a>");
+					$("#divCardLogin").html('<li class="fs_14" style="background:none;"><IMG SRC="../static/images/right.png" ><a href="trainingcardlist.asp">账户查询</a></li><li class="fs_14" style="background:none;"><IMG SRC="../static/images/right.png" ><a href="trainingcardpassword.asp">修改密码</a></li><li class="fs_14" style="background:none;"><IMG SRC="../static/images/right.png" ><a href="trainingcardlogout.asp">注销登录</a></li>');
 				}
 			}),
 		});
