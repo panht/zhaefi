@@ -105,6 +105,7 @@ rs.close%>
 				<tr>
 					<td class="news1">
 						<div id="divTrainingCard" style="display:none">
+							<input type="hidden" value="<%=session("cardno")%>" name="cardno" id="cardno" />
 							<!--学习卡号：<input type="input" value="" name="cardno" id="cardno" size="12" />
 							&nbsp;&nbsp;密码：<input type="password" name="cardpassword" id="cardpassword" size="12" />-->
 							&nbsp;&nbsp;报名人数：<input type="input" name="applyQuantity" id="applyQuantity" size="3" />人
