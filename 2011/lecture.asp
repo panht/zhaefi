@@ -91,7 +91,7 @@ rs.close%>
 				<tr><td class="news1" id="chooseFeeType">贵公司准备（请选择）： 
 				<input type="radio" value="1" name="FeeType" id="FeeType" style="border:0 0 0 0"/>现场交报名费&nbsp;
 				<input type="radio" value="2" name="FeeType" id="FeeType" style="border:0 0 0 0" checked />提前交报名费&nbsp;
-				<input type="radio" value="3" name="FeeType" id="FeeType" class="feetype3" style="border:0 0 0 0"/>使用学习卡交报名费&nbsp;
+				<input type="radio" value="3" name="FeeType" id="FeeType" class="feetype3" style="border:0 0 0 0" <%if len(session("cardno")) > 0 then response.write " checked"%>/>使用学习卡交报名费&nbsp;
 				<font color=red>*</font> </td></tr>
 				<tr>
 					<td class="news1" align="center">
@@ -101,7 +101,7 @@ rs.close%>
 				</tr>
 				<tr>
 					<td class="news1">
-						<div id="divTrainingCard" style="display:none">
+						<div id="divTrainingCard" style="display:none;<%if len(session("cardno")) > 0 then response.write " display:block;"%>">
 							<input type="hidden" value="<%=session("cardno")%>" name="cardno" id="cardno" />
 							<!--学习卡号：<input type="input" value="" name="cardno" id="cardno" size="12" />
 							&nbsp;&nbsp;密码：<input type="password" name="cardpassword" id="cardpassword" size="12" />-->
