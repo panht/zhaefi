@@ -5,7 +5,11 @@ Response.Charset="GBK" %>
 <%
 'on error resume next
 If request("action")="apply" then
-	feetype=decodeText(request("feetype"))
+	if isnull(request("feetype")) or request("feetype") = "undefined" then
+		feetype = 0
+	else
+		feetype=decodeText(request("feetype"))
+	end if
 	cardno=decodeText(request("cardno"))
 	cardpassword=decodeText(request("cardpassword"))
 	applyQuantity=decodeText(request("applyQuantity"))

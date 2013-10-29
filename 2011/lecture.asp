@@ -177,7 +177,7 @@ function chk(){
 	LectureID=$("#LectureID").val();
 	company=encodeURIComponent(encodeURIComponent($("#company").val()));
 	applyUsername=encodeURIComponent(encodeURIComponent($("#applyUsername").val()));
-	feetype=$("#FeeType:checked").val().trim();
+	feetype=$("#FeeType:checked").val();
 	tel=encodeURIComponent(encodeURIComponent($("#tel").val()));
 	fax=encodeURIComponent(encodeURIComponent($("#fax").val()));
 	cellphone=encodeURIComponent(encodeURIComponent($("#cellphone").val()));
